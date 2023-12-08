@@ -15,6 +15,7 @@ module.exports = {
     iceCreamButton: '.counter-plus',
     orderRequirementsButton: '.reqs-header',
     blanketAndHandkerchiefsButton: '.r-sw',
+    supportiveTaxi:'div=Supportive',
     // Modals
     phoneNumberModal: '.modal',
     paymentMethodButton: '.pp-text',
