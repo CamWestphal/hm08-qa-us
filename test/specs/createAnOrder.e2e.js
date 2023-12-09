@@ -4,11 +4,18 @@ const helper = require('../../helper')
 describe('Create an order', () => { 
     it('test 1: Set the address', async () => {
         await browser.url(`/`)
-        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const addressA = 'East 2nd Street, 601';
+        const addressB = '1300 1st St';
+        await page.fillAddresses(addressA, addressB);
+        await expect (await $(page.fromField)).toBeExisting(addressA);
+        await expect (await $(page.toField)).toBeExisting(addressB);
+
     })
     it('test 2: select supportive plan', async () => {
         const supportiveTaxi =$(page.supportiveTaxi);
         await supportiveTaxi.click();
+        const activeSupportiveTaxi = $(page.activeSupportiveTaxi);
+        await expect (await $(page.activeSupportiveTaxi)).toBeExisting;
     })
 
     //phone number modal and saving the phone number are in seperate it statements
@@ -34,7 +41,6 @@ describe('Create an order', () => {
     it('test 4: should add a credit card to the order ', async () => {
         await browser.url('/')
         await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
-        
         await page.fillCreditCard();
         //card payment icon 
         const cardPaymentIcon = await $(page.cardPaymentIcon);
@@ -50,10 +56,13 @@ describe('Create an order', () => {
         await expect(message).toBe('sing me some lullabys');
     })
     it('test 6: order a blanket and handkerchiefs', async () => {
+        await browser.url('/')
+        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
         const blanketAndHandkerchiefsButton = $(page.blanketAndHandkerchiefsButton);
+        const blanketAndHandkerchiefsCheck = $(page.blanketAndHandkerchiefsCheck)
         await blanketAndHandkerchiefsButton.waitForClickable();
         await blanketAndHandkerchiefsButton.click();
-        await expect(blanketAndHandkerchiefsButton).toBeExisting();
+        await expect(blanketAndHandkerchiefsCheck).toBeChecked();
     })
     it('test 7: should add two ice creams to the order ', async () => {
         await browser.url('/')
@@ -71,8 +80,14 @@ describe('Create an order', () => {
     })
 
     it('test 8: should order the taxi', async () =>{
+        await browser.url(`/`) 
+        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
         const orderTaxiButton = await $(page.orderTaxiButton);
-        await orderTaxiButton.waitForDisplayed
+        await orderTaxiButton.waitForDisplayed;
         await orderTaxiButton.click();
+        await browser.pause(5000)
+        const taxiModal = await $(page.taxiModal); 
+        //this test is failing. the modal shows up for a split second and dissapears so it doesnt count it as 'existing'
+        await expect(taxiModal).toBeExisting(); 
     })
 })

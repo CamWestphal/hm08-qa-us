@@ -11,10 +11,11 @@ module.exports = {
     phoneNumberButton: '//div[starts-with(text(), "Phone number")]',
     nextButton: 'button=Next',
     confirmButton: 'button=Confirm',
-    orderTaxiButton: '.smart-button',
+    orderTaxiButton: '.smart-button-wrapper',
     iceCreamButton: '.counter-plus',
     orderRequirementsButton: '.reqs-header',
     blanketAndHandkerchiefsButton: '.r-sw',
+    blanketAndHandkerchiefsCheck: '.switch-input',
     supportiveTaxi:'div=Supportive',
     // Modals
     phoneNumberModal: '.modal',
@@ -22,10 +23,12 @@ module.exports = {
     addCardButton: 'div=Add card',
     linkCardButton: 'button=Link',
     closeCardPaymentMethodModalButton: '.payment-picker .close-button',
+    taxiModal: 'order shown',
     //misc
     cardSignatureStrip:'.plc',
     cardPaymentIcon:"img[alt='card']",
     supportiveTaxi: 'div=Supportive',
+    activeSupportiveTaxi: '.tcard active Supportive',
     counterValue: '.counter .counter-value',
     //comment field
     commentField: '#comment',
